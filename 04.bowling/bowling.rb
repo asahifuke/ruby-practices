@@ -2,41 +2,41 @@
 # frozen_string_literal: true
 
 class Bowling
+  FIRST_STRIKE_SCORE  = 10
+  SECOND_STRIKE_SCORE = 0
+  SPARE_SCORE         = 10
+  NO_BOUNUS           = 0
+
   def initialize
-    @first_throws  = []
-    @second_throws = []
-    @bonuses       = []
-    @throw_index   = 0
-    @throws        = ARGV[0].split(',')
-  end
-
-  def score(first_throw:, second_throw:, bonus:)
-    @first_throws.push(first_throw)
-    @second_throws.push(second_throw)
-    @bonuses.push(bonus)
-  end
-
-  def judge_strike(next_throw_index)
-    @throws[@throw_index + next_throw_index] == 'X' ? @first_strike_score : @throws[@throw_index + next_throw_index].to_i
+    @throws = ARGV[0].split(',')
   end
 
   def play
-    @first_strike_score  = 10
-    @second_strike_score = 0
-    @spare_score         = 10
-    @no_bonus            = 0
+    total = 0
+    throw_index = 0
 
     10.times do
-      if @throws[@throw_index] == 'X'
-        score(first_throw: @first_strike_score, second_throw: @second_strike_score, bonus: judge_strike(1) + judge_strike(2))
-        @throw_index += 1
+      first_score = @throws[throw_index]
+      second_score = @throws[throw_index + 1]
+      third_score = @throws[throw_index + 2]
+
+      if first_score == 'X'
+        bonus = judge_strike(second_score) + judge_strike(third_score)
+        total += FIRST_STRIKE_SCORE + SECOND_STRIKE_SCORE + bonus
+        throw_index += 1
       else
-        bonus = @throws[@throw_index].to_i + @throws[@throw_index + 1].to_i == @spare_score ? judge_strike(2) : @no_bonus
-        score(first_throw: @throws[@throw_index].to_i, second_throw: @throws[@throw_index + 1].to_i, bonus: bonus)
-        @throw_index += 2
+        bonus = first_score.to_i + second_score.to_i == SPARE_SCORE ? judge_strike(third_score) : NO_BOUNUS
+        total += first_score.to_i + second_score.to_i + bonus
+        throw_index += 2
       end
     end
-    puts @first_throws.sum + @second_throws.sum + @bonuses.sum
+    puts total
+  end
+
+  private
+
+  def judge_strike(score)
+    score == 'X' ? FIRST_STRIKE_SCORE : score.to_i
   end
 end
 
