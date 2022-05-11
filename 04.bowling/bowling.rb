@@ -21,11 +21,11 @@ class Bowling
       third_score = @throws[throw_index + 2]
 
       if first_score == 'X'
-        bonus = judge_strike(second_score) + judge_strike(third_score)
+        bonus = score(second_score) + score(third_score)
         total += FIRST_STRIKE_SCORE + SECOND_STRIKE_SCORE + bonus
         throw_index += 1
       else
-        bonus = first_score.to_i + second_score.to_i == SPARE_SCORE ? judge_strike(third_score) : NO_BOUNUS
+        bonus = first_score.to_i + second_score.to_i == SPARE_SCORE ? score(third_score) : NO_BOUNUS
         total += first_score.to_i + second_score.to_i + bonus
         throw_index += 2
       end
@@ -35,7 +35,7 @@ class Bowling
 
   private
 
-  def judge_strike(score)
+  def score(score)
     score == 'X' ? FIRST_STRIKE_SCORE : score.to_i
   end
 end
