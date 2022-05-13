@@ -12,21 +12,21 @@ class Bowling
   end
 
   def play
-    total = 0
+    total       = 0
     throw_index = 0
 
     10.times do
-      first_score = @throws[throw_index]
-      second_score = @throws[throw_index + 1]
-      third_score = @throws[throw_index + 2]
+      first_score  = score(@throws[throw_index])
+      second_score = score(@throws[throw_index + 1])
+      third_score  = score(@throws[throw_index + 2])
 
-      if first_score == 'X'
-        bonus = score(second_score) + score(third_score)
+      if first_score == FIRST_STRIKE_SCORE
+        bonus = second_score + third_score
         total += FIRST_STRIKE_SCORE + SECOND_STRIKE_SCORE + bonus
         throw_index += 1
       else
-        bonus = first_score.to_i + second_score.to_i == SPARE_SCORE ? score(third_score) : NO_BOUNUS
-        total += first_score.to_i + second_score.to_i + bonus
+        bonus = first_score + second_score == SPARE_SCORE ? third_score : NO_BOUNUS
+        total += first_score + second_score + bonus
         throw_index += 2
       end
     end
@@ -35,8 +35,8 @@ class Bowling
 
   private
 
-  def score(score)
-    score == 'X' ? FIRST_STRIKE_SCORE : score.to_i
+  def score(throw)
+    throw == 'X' ? FIRST_STRIKE_SCORE : throw.to_i
   end
 end
 
