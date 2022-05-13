@@ -2,7 +2,6 @@
 # frozen_string_literal: true
 require 'optparse'
 require 'Date'
-
 class Calendar
   DAY_OF_WEEK = '日 月 火 水 木 金 土'
   SATURDAY    = 6
