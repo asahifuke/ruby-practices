@@ -118,8 +118,6 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-
 .rubocop.yml
 Gemfile
 Gemfile.lock
-
