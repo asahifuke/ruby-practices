@@ -2,16 +2,13 @@
 
 require 'rake/clean'
 
-CC   = 'gcc'
-SRCS = FileList['**/*.c']
-OBJS = SRCS.ext('o')
-
-CLEAN.include(OBJS)
-CLOBBER.include('calculate_square_area')
+CC      = 'gcc'
+SOURCES = FileList['**/*.c']
+OBJECTS = SOURCES.ext('o')
 
 task 'default' => 'calculate_square_area'
 
-file 'calculate_square_area' => OBJS do |t|
+file 'calculate_square_area' => OBJECTS do |t|
   sh "#{CC} -o #{t.name} #{t.prerequisites.join(' ')}"
 end
 
