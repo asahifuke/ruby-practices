@@ -9,9 +9,9 @@ RSpec.describe Frame do
   let(:two) { Shot.new(2) }
   let(:three) { Shot.new(3) }
   let(:eight) { Shot.new(8) }
-  let(:strike_frame) { Frame.new(strike, zero, strike, strike) }
-  let(:spare_frame) { Frame.new(two, eight, strike, zero) }
-  let(:usual_frame) { Frame.new(three, three, zero, zero) }
+  let(:strike_frame) { Frame.new(strike, strike, strike) }
+  let(:spare_frame) { Frame.new(two, eight, strike) }
+  let(:usual_frame) { Frame.new(three, three, zero) }
 
   it '最後のフレームでストライク' do
     expect(strike_frame.sum).to eq 30

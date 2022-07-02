@@ -5,7 +5,6 @@ require_relative './shot'
 
 class Game
   FRAME_NUMBER = 10
-  ZERO = Shot.new(0)
 
   def initialize(score_text)
     @scores = score_text.split(',')
@@ -17,16 +16,8 @@ class Game
       first  = Shot.new(@scores[index])
       second = Shot.new(@scores[index + 1])
       third  = Shot.new(@scores[index + 2])
-      frame  = Frame.new(first, second, ZERO, ZERO)
-      index += 2
-      if frame.strike?
-        frame.second = ZERO
-        frame.bonus1 = second
-        frame.bonus2 = third
-        index -= 1
-      elsif frame.spare?
-        frame.bonus1 = third
-      end
+      frame  = Frame.new(first, second, third)
+      index += frame.strike? ? 1 : 2
       frame.sum
     end
   end

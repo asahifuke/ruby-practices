@@ -1,17 +1,18 @@
 # frozen_string_literal: true
 
 class Frame
-  attr_writer :second, :bonus1, :bonus2
-
-  def initialize(first, second, bonus1, bonus2)
+  def initialize(first, second, third)
     @first  = first
     @second = second
-    @bonus1 = bonus1
-    @bonus2 = bonus2
+    @third  = third
   end
 
   def sum
-    @first.point + @second.point + @bonus1.point + @bonus2.point
+    if strike? || spare?
+      @first.point + @second.point + @third.point
+    else
+      @first.point + @second.point
+    end
   end
 
   def spare?
