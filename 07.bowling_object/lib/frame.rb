@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
 class Frame
-  def initialize(first, second, third)
-    @first  = first
-    @second = second
-    @third  = third
+  def initialize(shots)
+    @shots  = shots
+    @first  = shots[0]
+    @second = shots[1]
   end
 
   def sum
     if strike? || spare?
-      @first.point + @second.point + @third.point
+      @shots.sum(&:point)
     else
       @first.point + @second.point
     end

@@ -13,10 +13,8 @@ class Game
   def sum
     index = 0
     FRAME_NUMBER.times.sum do
-      first  = Shot.new(@scores[index])
-      second = Shot.new(@scores[index + 1])
-      third  = Shot.new(@scores[index + 2])
-      frame  = Frame.new(first, second, third)
+      shots = @scores[index, 3].map { |mark| Shot.new(mark) }
+      frame  = Frame.new(shots)
       index += frame.strike? ? 1 : 2
       frame.sum
     end
