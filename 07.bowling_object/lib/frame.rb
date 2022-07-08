@@ -14,7 +14,7 @@ class Frame
   end
 
   def strike?
-    @shots[0].point == 10
+    @shots.first.point == 10
   end
 
   private
