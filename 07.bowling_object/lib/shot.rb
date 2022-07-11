@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# ポイントを管理する
 class Shot
   attr_reader :point
 

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# １フレームの合計点を計算する
 class Frame
   def initialize(shots)
     @shots = shots
@@ -9,7 +10,7 @@ class Frame
     if strike? || spare?
       @shots.sum(&:point)
     else
-      add_first_and_second
+      first_two_sum
     end
   end
 
@@ -19,11 +20,11 @@ class Frame
 
   private
 
-  def add_first_and_second
+  def first_two_sum
     @shots[0..1].sum(&:point)
   end
 
   def spare?
-    !strike? && add_first_and_second == 10
+    !strike? && first_two_sum == 10
   end
 end
