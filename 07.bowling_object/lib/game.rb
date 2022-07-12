@@ -3,7 +3,7 @@
 require_relative './frame'
 require_relative './shot'
 
-# １試合の合計点を計算する
+# ボウリングの1試合を表すクラス
 class Game
   def initialize(score_text)
     @scores = score_text.split(',')

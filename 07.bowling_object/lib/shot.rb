@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# ポイントを管理する
+# ボウリングのショットを表すクラス
 class Shot
   attr_reader :point
 

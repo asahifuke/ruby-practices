@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# １フレームの合計点を計算する
+# ボウリングの１フレームを表すクラス
 class Frame
   def initialize(shots)
     @shots = shots
