@@ -27,4 +27,15 @@ class ListTest < Minitest::Test
     output = "ls_test.rb       .DS_Store   \ncolumn_test.rb   .           "
     assert_equal output, list.show
   end
+
+  def test_l
+    list = List.new(['*', File::FNM_DOTMATCH], true)
+    output = <<~TEXT
+    total 24
+    -rw-r--r--  1 asahi.fuke  staff  394  7 12 23:20 ls.rb
+    -rw-r--r--  1 asahi.fuke  staff  722  7 12 23:16 list.rb
+    -rw-r--r--  1 asahi.fuke  staff  349  7 12 23:16 column.rb
+    TEXT
+    assert_equal output, list.show
+  end
 end
