@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# ボウリングの１フレームを表すクラス
 class Frame
   def initialize(shots)
     @shots = shots

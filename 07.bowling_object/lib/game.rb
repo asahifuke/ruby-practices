@@ -3,7 +3,6 @@
 require_relative './frame'
 require_relative './shot'
 
-# ボウリングの1試合を表すクラス
 class Game
   def initialize(score_text)
     @scores = score_text.split(',')
