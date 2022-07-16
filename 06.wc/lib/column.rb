@@ -1,41 +1,38 @@
 # frozen_string_literal: true
 
 class Column
-  def initialize(path, options)
-    @path = path
+  def initialize(options:, texts: nil, name: '', total: nil)
+    @texts = texts
     @options = options
+    @name = name
+    @total = total
   end
 
   def show
     @options.map.with_index do |option, index|
       all[index].to_s.rjust(8) if option.last
-    end.push(" #{@path.rjust(7)}").join
+    end.push(" #{@name.rjust(7)}").join
   end
 
   def all
-    [count_lines, count_words, count_byte]
+    @total || [count_lines, count_words, count_byte]
   end
 
+  private
+
   def count_lines
-    File.open(@path) do |file|
-      while file.gets; end
-      file.lineno
-    end
+    @texts.size
   end
 
   def count_words
-    File.open(@path) do |file|
-      total = 0
-      while (line_before = file.gets)
-        line_after = line_before.split(/\s+/)
-        line_after.delete('')
-        total += line_after.size
-      end
-      total
+    @texts.sum do |text|
+      text_after = text.split(/\s+/)
+      text_after.delete('')
+      text_after.size
     end
   end
 
   def count_byte
-    File.size(@path)
+    @texts.sum(&:bytesize)
   end
 end

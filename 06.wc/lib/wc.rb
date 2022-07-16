@@ -12,6 +12,7 @@ def main
     options['w'] = true
     options['c'] = true
   end
+  
   rows = Row.new(options)
   puts rows.show
 end
