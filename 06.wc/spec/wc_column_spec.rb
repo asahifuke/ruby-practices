@@ -3,11 +3,6 @@
 require_relative '../lib/wc/column'
 
 RSpec.describe Column do
-  it 'showのテスト' do
-    column = Column.new(texts: './spec_helper.rb', options: { 'l' => true, 'w' => true, 'c' => true })
-    expect(column.show).to eq '      16    1513    1513 '
-  end
-
   it '-lのテスト' do
     column = Column.new(texts: './spec_helper.rb', options: { 'l' => true, 'w' => false, 'c' => false })
     expect(column.show).to eq '      16 '
@@ -36,6 +31,13 @@ RSpec.describe Column do
   it '-wcのテスト' do
     column = Column.new(texts: './spec_helper.rb', options: { 'l' => false, 'w' => true, 'c' => true })
     expect(column.show).to eq '    1513    1513 '
+  end
+end
+
+RSpec.describe Column do
+  it 'showのテスト' do
+    column = Column.new(texts: './spec_helper.rb', options: { 'l' => true, 'w' => true, 'c' => true })
+    expect(column.show).to eq '      16    1513    1513 '
   end
 
   it 'allのテスト' do

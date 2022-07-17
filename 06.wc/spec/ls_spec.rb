@@ -18,14 +18,16 @@ RSpec.describe List do
     expect(list.show).to eq 'spec   lib   '
   end
 
-  it 'arのテスト' do
-    list = List.new(['*', File::FNM_DOTMATCH], true, false)
-    expect(list.show).to eq "spec   .gitkeep    .\nlib    .DS_Store   "
-  end
-
   it 'lのテスト' do
     list = List.new(['*'], false, true)
     expect(list.show).to eq ['total 0', 'drwxr-xr-x  6 asahi.fuke  staff   192 7 16 23:30 lib', 'drwxr-xr-x  7 asahi.fuke  staff   224 7 17 11:39 spec']
+  end
+end
+
+RSpec.describe List do
+  it 'arのテスト' do
+    list = List.new(['*', File::FNM_DOTMATCH], true, false)
+    expect(list.show).to eq "spec   .gitkeep    .\nlib    .DS_Store   "
   end
 
   it 'lrのテスト' do
