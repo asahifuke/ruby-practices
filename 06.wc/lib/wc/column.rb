@@ -11,7 +11,7 @@ class Column
   def show
     @options.map.with_index do |option, index|
       all[index].to_s.rjust(8) if option.last
-    end.push(" #{@name.rjust(7)}").join
+    end.push(" #{@name}").join
   end
 
   def all

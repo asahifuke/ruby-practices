@@ -3,7 +3,7 @@
 # !/usr/bin/env ruby
 
 require 'optparse'
-require_relative './row'
+require_relative '../lib/wc/row'
 
 def main
   options = ARGV.getopts('l', 'w', 'c')
@@ -12,7 +12,7 @@ def main
     options['w'] = true
     options['c'] = true
   end
-  
+
   rows = Row.new(options)
   puts rows.show
 end
