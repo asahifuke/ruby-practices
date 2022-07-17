@@ -13,12 +13,12 @@ class List
   end
 
   def show
-    @is_detail ? detail : normal
+    @is_detail ? show_detail : show_normal
   end
 
   private
 
-  def detail
+  def show_detail
     total = 0
     @files_directories.map do |file_directorie|
       @stat = File.stat(file_directorie)
@@ -65,7 +65,7 @@ class List
     end
   end
 
-  def normal
+  def show_normal
     size = @files_directories.size
     number_of_files_in_a_column = size / NUMBER_OF_COLUMNS
     number_of_files_in_a_column += 1 unless (size % NUMBER_OF_COLUMNS).zero?
