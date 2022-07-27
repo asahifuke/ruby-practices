@@ -1,39 +1,38 @@
 # frozen_string_literal: true
 
-require_relative './column'
-
 class Row
-  def initialize(options)
+  def initialize(options:, texts: nil, name: '', total: nil)
+    @texts = texts
     @options = options
+    @name = name
+    @total = total
   end
 
   def show
-    @total = [0, 0, 0]
-    @texts = []
-    if ARGV.first.nil?
-      @output = []
-      while (text = $stdin.gets)
-        @texts << text
-      end
-      @output << show_column
-    else
-      @output =
-        ARGV.map do |row|
-          File.open(row, 'rt') do |file|
-            @texts = file.readlines
-          end
-          show_column(row)
-        end
-    end
-    @output << Column.new(options: @options, name: 'total', total: @total).show if ARGV.size >= 2
-    @output
+    @options.map.with_index do |option, index|
+      all[index].to_s.rjust(8) if option.last
+    end.push(" #{@name}").join
+  end
+
+  def all
+    @total || [count_lines, count_words, count_byte]
   end
 
   private
 
-  def show_column(name = '')
-    column = Column.new(texts: @texts, name: name, options: @options)
-    @total = [@total, column.all].transpose.map { |ary| ary.inject(:+) }
-    column.show
+  def count_lines
+    @texts.size
+  end
+
+  def count_words
+    @texts.sum do |text|
+      text_after = text.split(/\s+/)
+      text_after.delete('')
+      text_after.size
+    end
+  end
+
+  def count_byte
+    @texts.sum(&:bytesize)
   end
 end
