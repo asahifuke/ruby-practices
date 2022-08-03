@@ -1,21 +1,22 @@
 # frozen_string_literal: true
 
-class TextFile
+class Argument
   attr_reader :name
 
-  def initialize(name)
+  def initialize(value, name = nil)
+    @value = value
     @name = name
   end
 
   def count_bytes
-    FileTest.size(@name)
+    @value.size
   end
 
   def count_lines
-    IO.readlines(@name).count
+    @value.count("\n")
   end
 
   def count_words
-    File.read(@name).split(/\s+/).size
+    @value.split(/\s+/).size
   end
 end
