@@ -1,20 +1,22 @@
 # frozen_string_literal: true
 
 class Column
-  attr_reader :max_name_size, :files
+  attr_reader :max_file_size
 
-  def initialize
+  def initialize(max_file_size)
     @files = []
-    @max_name_size = 0
+    @max_file_size = max_file_size
   end
 
   def add(file)
-    size = file.size
-    @files << file
-    @max_name_size = size if @max_name_size < size
+    @files << file.sub(/\.+\//, '')
   end
 
-  def show(index)
-    @files[index] ? @files[index].ljust(@max_name_size) : nil
+  def size
+    @files.size
+  end
+
+  def place(line)
+    @files[line] ? @files[line].ljust(@files.map(&:size).max) : nil
   end
 end
