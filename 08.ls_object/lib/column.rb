@@ -9,7 +9,7 @@ class Column
   end
 
   def add(file)
-    @files << file.sub(/\.+\//, '')
+    @files << file.sub(%r{\.+/}, '')
   end
 
   def size

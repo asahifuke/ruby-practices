@@ -19,18 +19,18 @@ class Ls
 
   def require_files
     files = ARGV.first.nil? ? Dir.entries('.') : ARGV.map { |path| require_file(path) }.first
-    files = files.select { |file| !file.match?(/^\.+$|\/\./)} unless @options['a']
+    files = files.reject { |file| file.match?(%r{^\.+$|/\.}) } unless @options['a']
     files
   end
 
   def require_file(path)
     case path
     when '.'
-      return Dir.entries('.')
+      Dir.entries('.')
     when '..'
-      return Dir.entries(File.expand_path('..', File.dirname(__FILE__))).map { |path| '../' + path } 
+      Dir.entries(File.expand_path('..', File.dirname(__FILE__))).map { |name| "../#{name}" }
     else
-      return Dir.glob(path)
+      Dir.glob(path)
     end
   end
 

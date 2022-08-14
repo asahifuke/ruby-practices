@@ -19,7 +19,7 @@ class Normal
   end
 
   def create_max_lengthes
-    Array.new(NUMBER_OF_COLUMNS) { divide_by_NUMBER_OF_COLUMNS }
+    Array.new(NUMBER_OF_COLUMNS) { divide_by_number_of_columns }
   end
 
   def create_columns
@@ -27,7 +27,7 @@ class Normal
   end
 
   def adjust_max_lengthes
-    0.upto(remainder_divided_by_NUMBER_OF_COLUMNS - 1) { |index| @max_lengthes[index] += 1 }
+    0.upto(remainder_divided_by_number_of_columns - 1) { |index| @max_lengthes[index] += 1 }
   end
 
   def split_by_column
@@ -45,14 +45,14 @@ class Normal
   end
 
   def number_of_files_in_a_column
-    remainder_divided_by_NUMBER_OF_COLUMNS.zero? ? divide_by_NUMBER_OF_COLUMNS : divide_by_NUMBER_OF_COLUMNS + 1
+    remainder_divided_by_number_of_columns.zero? ? divide_by_number_of_columns : divide_by_number_of_columns + 1
   end
 
-  def divide_by_NUMBER_OF_COLUMNS
+  def divide_by_number_of_columns
     @files.size / NUMBER_OF_COLUMNS
   end
 
-  def remainder_divided_by_NUMBER_OF_COLUMNS
+  def remainder_divided_by_number_of_columns
     @files.size % NUMBER_OF_COLUMNS
   end
 end

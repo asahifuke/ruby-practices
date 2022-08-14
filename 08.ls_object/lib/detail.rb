@@ -3,7 +3,6 @@
 require 'etc'
 
 class Detail
-
   TYPES = {
     'file' => '-',
     'directory' => 'd',
@@ -12,7 +11,7 @@ class Detail
     'fifo' => 'p',
     'link' => 'l',
     'socket' => 's'
-  }
+  }.freeze
 
   PERMISSIONS = {
     '0' => '---',
@@ -23,7 +22,7 @@ class Detail
     '5' => 'r-x',
     '6' => 'rw-',
     '7' => 'rwx'
-  }
+  }.freeze
 
   def initialize(file)
     @file = file
@@ -37,7 +36,7 @@ class Detail
       Etc.getgrgid(File.stat(@file).gid).name.rjust(6),
       File.stat(@file).size.to_s.rjust(5),
       File.stat(@file).mtime.strftime('%-m  %_d %H:%M '),
-      @file.sub(/\.+\//, '')
+      @file.sub(%r{\.+/}, '')
     ].join(' ')
   end
 
@@ -52,6 +51,6 @@ class Detail
   end
 
   def require_permission
-    require_mode[3..5].chars.sum('') { |permission| PERMISSIONS[permission] } 
+    require_mode[3..5].chars.sum('') { |permission| PERMISSIONS[permission] }
   end
 end
