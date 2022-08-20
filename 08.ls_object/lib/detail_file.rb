@@ -2,7 +2,7 @@
 
 require 'etc'
 
-class Detail
+class DetailFile
   TYPES = {
     'file' => '-',
     'directory' => 'd',

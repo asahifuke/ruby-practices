@@ -1,8 +1,9 @@
+#!/usr/bin/env ruby
 # frozen_string_literal: true
 
 require 'optparse'
 require_relative './normal'
-require_relative './detail'
+require_relative './detail_file'
 
 class Ls
   def initialize
@@ -18,16 +19,16 @@ class Ls
   private
 
   def require_files
-    files = ARGV.first.nil? ? Dir.entries('.') : ARGV.map { |path| require_file(path) }.first
+    files = ARGV.first.nil? ? Dir.entries('.').sort : require_file(ARGV.first).sort
     files = files.reject { |file| file.match?(%r{^\.+$|/\.}) } unless @options['a']
     files
   end
 
   def require_file(path)
     case path
-    when '.'
+    when %r{^\./?$}
       Dir.entries('.')
-    when '..'
+    when %r{^\.\./?$}
       Dir.entries(File.expand_path('..', File.dirname(__FILE__))).map { |name| "../#{name}" }
     else
       Dir.glob(path)
@@ -39,7 +40,7 @@ class Ls
   end
 
   def run_detail
-    @files.map { |file| Detail.new(file).require_line }.unshift "total #{sum_blocks}"
+    @files.map { |file| DetailFile.new(file).require_line }.unshift "total #{sum_blocks}"
   end
 
   def sum_blocks

@@ -18,6 +18,8 @@ class Normal
     display_one_line_at_a_time
   end
 
+  private
+
   def create_max_lengthes
     Array.new(NUMBER_OF_COLUMNS) { divide_by_number_of_columns }
   end
