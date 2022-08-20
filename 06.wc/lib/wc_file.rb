@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Argument
+class WcFile
   attr_reader :name
 
   def initialize(value, name = nil)

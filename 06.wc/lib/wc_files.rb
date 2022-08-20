@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Arguments
+class WcFiles
   def initialize(options, values)
     @options = options
     @values = values 

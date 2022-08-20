@@ -3,8 +3,8 @@
 # !/usr/bin/env ruby
 
 require 'optparse'
-require_relative './arguments'
-require_relative './argument'
+require_relative './wc_files'
+require_relative './wc_file'
 
 class Wc
   def initialize
@@ -14,7 +14,7 @@ class Wc
   end
 
   def show
-    Arguments.new(@options, @inputs).show
+    WcFiles.new(@options, @inputs).show
   end
 
   private
@@ -32,11 +32,11 @@ class Wc
   end
 
   def create_stdin
-    [Argument.new($stdin.read)]
+    [WcFile.new($stdin.read)]
   end
 
   def create_text_files
-    ARGV.map { |value| Argument.new(File.read(value), value) }
+    ARGV.map { |value| WcFile.new(File.read(value), value) }
   end
 end
 
