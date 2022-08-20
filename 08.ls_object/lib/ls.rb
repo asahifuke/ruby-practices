@@ -40,7 +40,7 @@ class Ls
   end
 
   def run_detail
-    result = 
+    result =
       @files.map { |file| DetailFile.new(file).require_line }
     result.unshift "total #{sum_blocks}" if result[1]
     result
