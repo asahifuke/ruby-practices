@@ -9,7 +9,7 @@ class Column
   end
 
   def add(file)
-    @files << file.sub(%r{\.+/}, '')
+    @files << File.basename(file, '/*')
   end
 
   def size

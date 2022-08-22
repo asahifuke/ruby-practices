@@ -35,8 +35,8 @@ class DetailFile
       Etc.getpwuid(File.stat(@file).uid).name,
       Etc.getgrgid(File.stat(@file).gid).name.rjust(6),
       File.stat(@file).size.to_s.rjust(5),
-      File.stat(@file).mtime.strftime('%-m  %_d %H:%M '),
-      @file.sub(%r{\.+/}, '')
+      File.stat(@file).mtime.strftime(' %-m %_d %H:%M'),
+      File.basename(@file, '/*')
     ].join(' ')
   end
 

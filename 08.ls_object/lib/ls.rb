@@ -31,7 +31,7 @@ class Ls
     when %r{^\.\./?$}
       Dir.entries(File.expand_path('..', File.dirname(__FILE__))).map { |name| "../#{name}" }
     else
-      Dir.glob(path)
+      Dir.glob("#{File.expand_path(path)}/*")
     end
   end
 
